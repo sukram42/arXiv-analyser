@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 # If debug is True, then only one of the queries is applied on 2 years
 DEBUG = False
 
-TOPICS = ["graph",
+TOPICS = [#"graph",
           "anomaly detection time series",
           "anomaly detection",
           "anomaly detection graphs",
@@ -65,6 +65,10 @@ for topic in TOPICS:
         res = feedparser.parse(query)
         res = list(filter(filter_year(year), map(map_entries, res['entries'])))
         entries.extend(res)
+
+        # Wait a bit in behalf of the server
+        for i in range(6):
+            time.sleep(5)
 
     res_df = pd.DataFrame.from_dict(entries)
 
